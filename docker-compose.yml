@@ -1,0 +1,87 @@
+version: '3.8'
+
+volumes:
+  pgdata_global:
+  pgdata_local:
+  pgadmin:
+
+services:
+  django_dev:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.django
+    expose:
+      - 1025
+      - 8025
+      - 587  
+    ports:
+      - "0.0.0.0:8000:8000"
+    volumes:
+      - .:/usr/src/app/
+      - /tmp:/tmp
+    hostname: django_dev
+    environment:
+      - RUN_DOCKERIZED=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DJANGO_SUPERUSER_PASSWORD=admin
+      - DJANGO_SUPERUSER_EMAIL=admin@booking.local
+      - DJANGO_SUPERUSER_USERNAME=admin
+    container_name: django_dev
+    depends_on:
+      - db_postgres_global
+      - db_postgres_local
+
+  db_pgadmin:
+    image: dpage/pgadmin4
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "127.0.0.1:8001:80"
+    container_name: db_pgadmin
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+    depends_on:
+      - db_postgres_global
+
+  db_postgres_global:
+    image: postgres
+    volumes:
+      - pgdata_global:/var/lib/postgresql/data
+      - ./DB/init-scripts-global:/docker-entrypoint-initdb.d
+      - /tmp:/tmp
+    environment:
+      - TZ=Europe/Bucharest
+      - PGTZ=Europe/Bucharest
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=global_hotels
+      - POSTGRES_INITDB_ARGS ='--username=postgres  --schema=schema_global_hotels --schema=schema_local_hotels' 
+    hostname: db_postgres_global
+    container_name: db_postgres_global  
+    command: postgres -c 'shared_preload_libraries=pg_stat_statements'  # Optional: Enable pg_stat_statements extension 
+
+
+
+  db_postgres_local:
+    image: postgres
+    volumes:
+      - pgdata_local:/var/lib/postgresql/data
+      - ./DB/init-scripts-local:/docker-entrypoint-initdb.d
+      - /tmp:/tmp
+    environment:
+      - TZ=Europe/Bucharest
+      - PGTZ=Europe/Bucharest
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=local_hotels
+    hostname: db_postgres_local
+    container_name: db_postgres_local
