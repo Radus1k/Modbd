@@ -1,4 +1,6 @@
 
+--DELETE FROM hotel;
+--DELETE FROM localitate;
 
 CALL insereaza_in_localitate('Abrud'::TEXT,34);
 CALL insereaza_in_localitate('Adjud'::TEXT,26);

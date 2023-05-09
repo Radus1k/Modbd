@@ -2,7 +2,8 @@ version: '3.8'
 
 volumes:
   pgdata_global:
-  pgdata_local:
+  pgdata_local1:
+  pgdata_local2:
   pgadmin:
 
 services:
@@ -33,7 +34,7 @@ services:
     container_name: django_dev
     depends_on:
       - db_postgres_global
-      - db_postgres_local
+
 
   db_pgadmin:
     image: dpage/pgadmin4
@@ -62,19 +63,17 @@ services:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=global_hotels
-      - POSTGRES_INITDB_ARGS ='--username=postgres  --schema=schema_global_hotels --schema=schema_local_hotels' 
+      - POSTGRES_DB=global
     hostname: db_postgres_global
     container_name: db_postgres_global  
     command: postgres -c 'shared_preload_libraries=pg_stat_statements'  # Optional: Enable pg_stat_statements extension 
 
 
-
-  db_postgres_local:
+  db_postgres_local1:
     image: postgres
     volumes:
-      - pgdata_local:/var/lib/postgresql/data
-      - ./DB/init-scripts-local:/docker-entrypoint-initdb.d
+      - pgdata_local1:/var/lib/postgresql/data
+      - ./DB/init-scripts-local1:/docker-entrypoint-initdb.d
       - /tmp:/tmp
     environment:
       - TZ=Europe/Bucharest
@@ -82,6 +81,22 @@ services:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=local_hotels
-    hostname: db_postgres_local
-    container_name: db_postgres_local
+      - POSTGRES_DB=local1
+    hostname: db_postgres_local1
+    container_name: db_postgres_local1
+
+  db_postgres_local2:
+    image: postgres
+    volumes:
+      - pgdata_local2:/var/lib/postgresql/data
+      - ./DB/init-scripts-local2:/docker-entrypoint-initdb.d
+      - /tmp:/tmp
+    environment:
+      - TZ=Europe/Bucharest
+      - PGTZ=Europe/Bucharest
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=local2
+    hostname: db_postgres_local2
+    container_name: db_postgres_local2

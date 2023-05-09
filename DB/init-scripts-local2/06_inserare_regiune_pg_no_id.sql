@@ -1,4 +1,5 @@
 
+
 INSERT INTO regiune(
 nume)
 VALUES('Dobrogea'),

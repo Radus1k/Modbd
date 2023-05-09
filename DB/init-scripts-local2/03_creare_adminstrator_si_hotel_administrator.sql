@@ -1,4 +1,4 @@
-SET search_path to local_hotels;
+
 
 DROP TABLE IF EXISTS adminstrator CASCADE;
 CREATE TABLE administrator (

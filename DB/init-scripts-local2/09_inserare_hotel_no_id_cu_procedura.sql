@@ -1,4 +1,5 @@
 
+
 DELETE FROM hotel;
 
 

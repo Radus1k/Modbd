@@ -1,4 +1,5 @@
 
+
 DROP TABLE IF EXISTS facilitate CASCADE;
 CREATE TABLE facilitate( id_facilitate BIGINT GENERATED ALWAYS AS IDENTITY ( START WITH 1 INCREMENT BY 1),
 						nume TEXT CONSTRAINT nume_facilitate_nn NOT NULL );

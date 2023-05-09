@@ -1,5 +1,7 @@
-SET search_path to local_hotels;
+
+
 DROP TABLE IF EXISTS client CASCADE;
+
 CREATE TABLE client
 ( id_client BIGINT GENERATED ALWAYS as IDENTITY(START WITH 1 INCREMENT BY 1),
 nume_client VARCHAR(30) CONSTRAINT nume_client_nn NOT NULL,

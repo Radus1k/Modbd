@@ -1,4 +1,4 @@
-SET search_path to local2_hotels;
+
 
 DROP TABLE IF EXISTS facilitate CASCADE;
 CREATE TABLE facilitate( id_facilitate BIGINT GENERATED ALWAYS AS IDENTITY ( START WITH 1 INCREMENT BY 1),
