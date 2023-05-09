@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS dblink;
+
 CREATE OR REPLACE FUNCTION informatii_conectare_bd_asociata_rezervarii(p_id_rezervare INT)
 RETURNS TEXT AS $$
 DECLARE 
@@ -11,9 +13,6 @@ BEGIN
 	RETURN informatii_conectare_bd_asociata_hotelului(v_id_hotel);
 END;	
 $$ LANGUAGE plpgsql;
-
-
-
 
 
 CREATE OR REPLACE FUNCTION informatii_conectare_bd_asociata_hotelului(p_id_hotel INT)
@@ -77,8 +76,6 @@ BEGIN
 	END IF;
 END;		
 $$ LANGUAGE plpgsql;
-
-
 
 CREATE OR REPLACE FUNCTION informatii_conectare_bd(p_nr_server INT)
 RETURNS TEXT AS $$

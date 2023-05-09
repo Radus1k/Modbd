@@ -1,3 +1,6 @@
+CREATE EXTENSION IF NOT EXISTS dblink;
+
+
 CREATE OR REPLACE PROCEDURE insereaza_in_regiune(
 	p_id_regiune INT,
     p_nume TEXT 
