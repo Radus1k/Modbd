@@ -1,4 +1,6 @@
-INSERT INTO public.regiune(
+SET search_path = global_hotels;
+
+INSERT INTO regiune(
 nume)
 VALUES('Dobrogea'),
 ('Muntenia'),

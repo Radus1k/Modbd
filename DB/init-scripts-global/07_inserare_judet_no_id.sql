@@ -1,4 +1,6 @@
-INSERT INTO public.judet(
+SET search_path = global_hotels;
+
+INSERT INTO judet(
 nume, id_regiune)
 VALUES ('Tulcea',1),
 ('Constanta',1),

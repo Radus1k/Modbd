@@ -1,3 +1,5 @@
+SET search_path = global_hotels;
+
 CREATE OR REPLACE PROCEDURE insereaza_in_hotel(p_nume TEXT,
 											  p_nr_stele INT,
 											  p_adresa TEXT,

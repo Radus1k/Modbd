@@ -1,3 +1,4 @@
+SET search_path = global_hotels;
 --DELETE FROM hotel;
 --DELETE FROM localitate;
 

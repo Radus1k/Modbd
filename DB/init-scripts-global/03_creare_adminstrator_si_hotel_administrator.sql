@@ -1,3 +1,5 @@
+SET search_path = global_hotels;
+
 DROP TABLE IF EXISTS adminstrator CASCADE;
 CREATE TABLE administrator (
   id_administrator BIGINT PRIMARY KEY,
