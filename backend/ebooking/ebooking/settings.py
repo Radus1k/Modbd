@@ -88,15 +88,7 @@ DATABASES = {
         'PASSWORD': 'postgres',
         'HOST': 'db_postgres_global',  # Hostname of the global database container
         'PORT': 5432,
-    },
-    'local': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db_postgres_local',  # Hostname of the local database container
-        'PORT': 5432,
-    },
+    }
 }
 
 

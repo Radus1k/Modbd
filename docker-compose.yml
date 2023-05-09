@@ -67,6 +67,10 @@ services:
     hostname: db_postgres_global
     container_name: db_postgres_global  
     command: postgres -c 'shared_preload_libraries=pg_stat_statements'  # Optional: Enable pg_stat_statements extension 
+    depends_on:
+      - db_postgres_local1
+      - db_postgres_local2
+
 
 
   db_postgres_local1:
