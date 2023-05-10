@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block hotels %}
+
+{% load static %}
+
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+<div class="container">
+    <h1>Hotel Data</h1>
+
+    <div class="col-auto">
+        <a href="{% url 'add-hotel' %}" class="btn btn-primary">Adauga hotel</a>
+      </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Hotel ID</th>
+                <th>Name</th>
+                <th>Stars</th>
+                <th>Address</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hotel in hotels %}
+                <tr>
+                    <td>{{ hotel.id_hotel }}</td>
+                    <td>{{ hotel.nume }}</td>
+                    <td>{{ hotel.nr_stele }}</td>
+                    <td>{{ hotel.adresa }}</td>
+                    <td>{{ hotel.id_localitate }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

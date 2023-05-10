@@ -71,7 +71,7 @@ $$ LANGUAGE plpgsql;
 
 
 
-CREATE OR REPLACE FUNCTION gaseste_id_rezervare_cu_id_client_si_id_hotel_si_data_efectuari(p_id_client INTEGER, p_id_hotel INTEGER, p_data_efectuarii DATE)
+CREATE OR REPLACE FUNCTION gaseste_id_rezervare_cu_id_client_si_id_hotel_si_data_efectuarii(p_id_client INTEGER, p_id_hotel INTEGER, p_data_efectuarii DATE)
 RETURNS INTEGER
 LANGUAGE plpgsql
 AS $$
