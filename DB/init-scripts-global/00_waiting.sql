@@ -3,7 +3,7 @@ BEGIN
     RAISE NOTICE 'Waiting for the local databases to be created';
 END $$;
 
-SELECT pg_sleep(15);
+SELECT pg_sleep(5);
 
 
 DO $$
