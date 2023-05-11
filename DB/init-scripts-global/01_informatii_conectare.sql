@@ -1,19 +1,5 @@
 CREATE EXTENSION IF NOT EXISTS dblink;
 
-DO $$
-BEGIN
-    RAISE NOTICE 'Waiting for the local databases to be created';
-END $$;
-
-SELECT pg_sleep(50);
-
-
-DO $$
-BEGIN
-    RAISE NOTICE 'Local databases should have been created';
-END $$;
-
-
 CREATE OR REPLACE FUNCTION informatii_conectare_bd_asociata_rezervarii(p_id_rezervare INT)
 RETURNS TEXT AS $$
 DECLARE 

@@ -2,16 +2,52 @@
 CREATE EXTENSION IF NOT EXISTS pglogical;
     -- Create the replication slot
 
-SELECT pg_create_logical_replication_slot('global_slot', 'pgoutput');
+SELECT pglogical.create_node(
+    node_name := 'global',
+    dsn := 'host=db_postgres_global port=5432 dbname=global user=postgres password=postgres'
+);
 
-  -- Create the replication publication for the client table
-CREATE PUBLICATION client_pub FOR TABLE client;
 
-    -- Create the replication subscription for the client table
-CREATE SUBSCRIPTION client_subscription_local1
-        CONNECTION 'dbname=local1 host=db_postgres_local1 user=postgres password=postgres'
-        PUBLICATION client_pub;
+SELECT pglogical.create_replication_set('local1_set');
+SELECT pglogical.create_replication_set('local2_set');
 
-CREATE SUBSCRIPTION client_subscription_local2
-        CONNECTION 'dbname=local2 host=db_postgres_local1 user=postgres password=postgres'
-        PUBLICATION client_pub;     
+
+SELECT pglogical.replication_set_add_table('local1_set', 'public.facilitate');
+SELECT pglogical.replication_set_add_table('local1_set', 'public.tip_camera');
+SELECT pglogical.replication_set_add_table('local1_set', 'public.administrator');
+
+SELECT pglogical.replication_set_add_table('local2_set', 'public.facilitate');
+SELECT pglogical.replication_set_add_table('local2_set', 'public.tip_camera');
+SELECT pglogical.replication_set_add_table('local2_set', 'public.administrator');
+
+
+SELECT pglogical.create_replication_set('local1_client_set');
+SELECT pglogical.create_replication_set('local2_client_set');
+
+SELECT pglogical.replication_set_add_table('local1_client_set', 'public.client_replica');
+SELECT pglogical.replication_set_add_table('local2_client_set', 'public.client_replica');
+
+SELECT pglogical.create_subscription(
+    subscription_name := 'global_tolocal1_subscription',
+    replication_sets := ARRAY['local1_set'],
+    provider_dsn := 'host=db_postgres_local1 port=5432 dbname=local1 user=postgres password=postgres'
+);
+
+SELECT pglogical.create_subscription(
+    subscription_name := 'global_tolocal2_subscription',
+    replication_sets := ARRAY['local2_set'],
+    provider_dsn := 'host=db_postgres_local2 port=5432 dbname=local2 user=postgres password=postgres'
+);
+
+
+-- SELECT pglogical.create_subscription(
+--     subscription_name := 'global_tolocal1_client_subscription',
+--     replication_sets := ARRAY['local1_client_set'],
+--     provider_dsn := 'host=db_postgres_local1 port=5432 dbname=local1 user=postgres password=postgres'
+-- );
+
+-- SELECT pglogical.create_subscription(
+--     subscription_name := 'global_tolocal2_client_subscription',
+--     replication_sets := ARRAY['local2_client_set'],
+--     provider_dsn := 'host=db_postgres_local2 port=5432 dbname=local2 user=postgres password=postgres'
+-- );

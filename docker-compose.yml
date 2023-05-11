@@ -35,7 +35,6 @@ services:
     depends_on:
       - db_postgres_global
 
-
   db_pgadmin:
     image: dpage/pgadmin4
     volumes:
@@ -54,7 +53,7 @@ services:
   db_postgres_global:
     build:
       context: .
-      dockerfile: docker/Dockerfile.postgres
+      dockerfile: docker/Dockerfile.postgres     
     volumes:
       - pgdata_global:/var/lib/postgresql/data
       - ./DB/init-scripts-global:/docker-entrypoint-initdb.d
@@ -75,7 +74,7 @@ services:
   db_postgres_local1:
     build:
       context: .
-      dockerfile: docker/Dockerfile.postgres
+      dockerfile: docker/Dockerfile.postgres 
     volumes:
       - pgdata_local1:/var/lib/postgresql/data
       - ./DB/init-scripts-local1:/docker-entrypoint-initdb.d
@@ -93,7 +92,7 @@ services:
   db_postgres_local2:
     build:
       context: .
-      dockerfile: docker/Dockerfile.postgres
+      dockerfile: docker/Dockerfile.postgres      
     volumes:
       - pgdata_local2:/var/lib/postgresql/data
       - ./DB/init-scripts-local2:/docker-entrypoint-initdb.d

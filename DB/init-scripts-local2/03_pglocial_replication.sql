@@ -1,5 +1,32 @@
--- CREATE EXTENSION IF NOT EXISTS pglogical;
+-- DO $$
+-- BEGIN
+--     RAISE NOTICE 'Waiting for the global database to create the node and subscriptions';
+-- END $$;
 
--- CREATE SUBSCRIPTION client_subscription_local2
---     CONNECTION 'dbname=local2 host=db_postgres_global user=postgres password=postgres'
---     PUBLICATION client_pub;
+-- SELECT pg_sleep(30);
+
+
+-- DO $$
+-- BEGIN
+--     RAISE NOTICE 'Local databases should have been created';
+-- END $$;
+
+
+-- CREATE EXTENSION IF NOT EXISTS pglogical;
+-- -- On local2
+-- SELECT pglogical.create_node(
+--     node_name := 'local2',
+--     dsn := 'host=db_postgres_local2 port=5432 dbname=local2 user=postgres password=postgres'
+-- );
+
+-- SELECT pglogical.create_subscription(
+--     subscription_name := 'local2_subscription',
+--     replication_sets := ARRAY['local2_set'],
+--     provider_dsn := 'host=db_postgres_global port=5432 dbname=global user=postgres password=postgres'
+-- );
+
+-- SELECT pglogical.create_subscription(
+--     subscription_name := 'local2_client_subscription',
+--     replication_sets := ARRAY['local2_client_set'],
+--     provider_dsn := 'host=db_postgres_global port=5432 dbname=global user=postgres password=postgres'
+-- );
