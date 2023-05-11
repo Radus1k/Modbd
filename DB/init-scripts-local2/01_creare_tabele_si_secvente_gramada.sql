@@ -7,7 +7,6 @@ ALTER TABLE regiune
 ADD CONSTRAINT id_regiune_pk PRIMARY KEY (id_regiune);
 
 
-
 DROP TABLE IF EXISTS judet CASCADE;
 CREATE TABLE judet
 ( id_judet INT,

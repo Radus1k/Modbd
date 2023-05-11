@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hotels/', hotel_views.hotels_view, name='hotels'),
     path('add-hotel/', hotel_views.add_hotel_view, name='add-hotel'),
+    path('add-rezervare/', hotel_views.add_rezervare_view, name='add-rezervare'),
 ]

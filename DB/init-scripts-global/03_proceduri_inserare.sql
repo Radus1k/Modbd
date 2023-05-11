@@ -121,7 +121,6 @@ $$;
 --CALL insereaza_in_hotel('Hotel Privo'::TEXT,4,'Strada Principala, nr 106'::TEXT,gaseste_id_localitate_cu_nume_si_nume_judet('Targu Mures','Mures')::INT);
 --SELECT * FROM hotel;
 
-
 	
 		
 CREATE OR REPLACE PROCEDURE insereaza_in_recenzie(p_id_client INT,
@@ -156,44 +155,81 @@ $$;
 
 
 
+-- OLD REZERVARE METHOD
 
+-- CREATE OR REPLACE PROCEDURE insereaza_in_rezervare(
+--     p_id_client INT,
+--     p_id_hotel INT,
+--     p_data_efectuarii DATE,
+--     p_data_inceput DATE,
+--     p_data_sfarsit DATE)
+-- LANGUAGE plpgsql AS $$
+-- DECLARE
+--     v_id_rezervare INT;
+--     v_informatii_conectare TEXT;
+-- 	v_string_data_efectuarii CHAR(10);
+-- 	v_string_data_inceput CHAR(10);
+-- 	v_string_data_sfarsit CHAR(10);
+-- 	v_status_conectare TEXT;
+-- BEGIN
+--     v_informatii_conectare:= informatii_conectare_bd_asociata_hotelului(p_id_hotel);
+-- 	SELECT dblink_connect('local',v_informatii_conectare) INTO v_status_conectare;
+-- 	IF v_status_conectare NOT LIKE 'OK' THEN
+-- 		RAISE 'EROARE! Nu s-a putut face conexiunea la serverul local.' USING ERRCODE = 'unique_violation';
+-- 	END IF;
+
+-- 	IF position('dbname=local1' in v_informatii_conectare)>0 THEN
+-- 		v_id_rezervare:=NEXTVAL('rezervare_serv1_seq');
+-- 	ELSE
+-- 		v_id_rezervare:=NEXTVAL('rezervare_serv2_seq');
+-- 	END IF;
+	
+-- 	v_string_data_efectuarii:=TO_CHAR(p_data_efectuarii,'DD-MM-YYYY');
+-- 	v_string_data_inceput:=TO_CHAR(p_data_inceput,'DD-MM-YYYY');
+-- 	v_string_data_sfarsit:=TO_CHAR(p_data_sfarsit,'DD-MM-YYYY');
+-- 	PERFORM dblink_exec('local','INSERT INTO rezervare(id_rezervare,id_client,id_hotel,data_efectuarii,data_inceput,data_sfarsit) 
+-- 						VALUES(' || v_id_rezervare || ', ' || p_id_client || ', ' || p_id_hotel || ', TO_DATE(''' || v_string_data_efectuarii || ''',''DD-MM-YYYY''), TO_DATE(''' || v_string_data_inceput || ''',''DD-MM-YYYY''), TO_DATE(''' || v_string_data_sfarsit || ''',''DD-MM-YYYY'')); COMMIT;');
+-- 	PERFORM dblink_disconnect('local');
+-- END;
+-- $$;
+
+-- NEW REZERVARE METHOD
 CREATE OR REPLACE PROCEDURE insereaza_in_rezervare(
     p_id_client INT,
     p_id_hotel INT,
-    p_data_efectuarii DATE,
-    p_data_inceput DATE,
-    p_data_sfarsit DATE)
+    p_data_efectuarii TEXT,
+    p_data_inceput TEXT,
+    p_data_sfarsit TEXT)
 LANGUAGE plpgsql AS $$
 DECLARE
     v_id_rezervare INT;
     v_informatii_conectare TEXT;
-	v_string_data_efectuarii CHAR(10);
-	v_string_data_inceput CHAR(10);
-	v_string_data_sfarsit CHAR(10);
-	v_status_conectare TEXT;
+    v_status_conectare TEXT;
 BEGIN
     v_informatii_conectare:= informatii_conectare_bd_asociata_hotelului(p_id_hotel);
-	SELECT dblink_connect('local',v_informatii_conectare) INTO v_status_conectare;
-	IF v_status_conectare NOT LIKE 'OK' THEN
-		RAISE 'EROARE! Nu s-a putut face conexiunea la serverul local.' USING ERRCODE = 'unique_violation';
-	END IF;
+    SELECT dblink_connect('local',v_informatii_conectare) INTO v_status_conectare;
+    IF v_status_conectare NOT LIKE 'OK' THEN
+        RAISE 'EROARE! Nu s-a putut face conexiunea la serverul local.' USING ERRCODE = 'unique_violation';
+    END IF;
 
-	IF position('dbname=local1' in v_informatii_conectare)>0 THEN
-		v_id_rezervare:=NEXTVAL('rezervare_serv1_seq');
-	ELSE
-		v_id_rezervare:=NEXTVAL('rezervare_serv2_seq');
-	END IF;
-	
-	v_string_data_efectuarii:=TO_CHAR(p_data_efectuarii,'DD-MM-YYYY');
-	v_string_data_inceput:=TO_CHAR(p_data_inceput,'DD-MM-YYYY');
-	v_string_data_sfarsit:=TO_CHAR(p_data_sfarsit,'DD-MM-YYYY');
-	PERFORM dblink_exec('local','INSERT INTO rezervare(id_rezervare,id_client,id_hotel,data_efectuarii,data_inceput,data_sfarsit) 
-						VALUES(' || v_id_rezervare || ', ' || p_id_client || ', ' || p_id_hotel || ', TO_DATE(''' || v_string_data_efectuarii || ''',''DD-MM-YYYY''), TO_DATE(''' || v_string_data_inceput || ''',''DD-MM-YYYY''), TO_DATE(''' || v_string_data_sfarsit || ''',''DD-MM-YYYY'')); COMMIT;');
-	PERFORM dblink_disconnect('local');
+    IF position('dbname=local1' in v_informatii_conectare)>0 THEN
+        v_id_rezervare:=NEXTVAL('rezervare_serv1_seq');
+    ELSE
+        v_id_rezervare:=NEXTVAL('rezervare_serv2_seq');
+    END IF;
+    
+    
+    PERFORM dblink_exec('local','INSERT INTO rezervare(id_rezervare,id_client,id_hotel,data_efectuarii,data_inceput,data_sfarsit) 
+                        VALUES(' || v_id_rezervare || ', ' || p_id_client || ', ' || p_id_hotel || ', TO_DATE(''' || p_data_efectuarii || ''',''DD-MM-YYYY''), TO_DATE(''' || p_data_inceput || ''',''DD-MM-YYYY''), TO_DATE(''' || p_data_sfarsit || ''',''DD-MM-YYYY'')); COMMIT;');
+    PERFORM dblink_disconnect('local');
 END;
 $$;
+
+
 --SELECT dblink_disconnect('local');
 --CALL insereaza_in_rezervare(1,1222,CURRENT_DATE,TO_DATE('11-AUG-2023', 'DD-MON-YYYY'), TO_DATE('22-AUG-2023', 'DD-MON-YYYY'));
+
+
 
 
 

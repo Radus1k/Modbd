@@ -28,6 +28,9 @@ class Client(models.Model):
     class Meta:
         managed = False
         db_table = 'client'
+
+    def __str__(self) -> str:
+        return self.nume_complet
         
 
 class Facilitate(models.Model):
@@ -59,6 +62,9 @@ class Hotel(models.Model):
     class Meta:
         managed = False
         db_table = 'hotel'
+
+    def __str__(self) -> str:
+        return self.nume    
 
 
 class HotelAdministrator(models.Model):
