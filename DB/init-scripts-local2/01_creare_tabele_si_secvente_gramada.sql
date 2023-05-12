@@ -82,19 +82,19 @@ ADD CONSTRAINT tip_camera_fk_hotel_tip_camera FOREIGN KEY (id_tip_camera) REFERE
 
 
 
-DROP TABLE IF EXISTS client CASCADE;
-CREATE TABLE client
-( id_client INT GENERATED ALWAYS as IDENTITY(START WITH 1 INCREMENT BY 1),
-nume_utilizator VARCHAR(30) CONSTRAINT nume_client_nn NOT NULL,
-hash_parola VARCHAR(25) CONSTRAINT hash_parola_client_nn NOT NULL,
-nume_complet VARCHAR(30) CONSTRAINT nume_complet_client_nn NOT NULL,
-telefon CHAR(15) CONSTRAINT telefon_client_nn NOT NULL,
-email VARCHAR(50) CONSTRAINT email_client_nn NOT NULL,
-cnp CHAR(13),
-iban CHAR(34));
+-- DROP TABLE IF EXISTS client CASCADE;
+-- CREATE TABLE client
+-- ( id_client INT GENERATED ALWAYS as IDENTITY(START WITH 1 INCREMENT BY 1),
+-- nume_utilizator VARCHAR(30) CONSTRAINT nume_client_nn NOT NULL,
+-- hash_parola VARCHAR(25) CONSTRAINT hash_parola_client_nn NOT NULL,
+-- nume_complet VARCHAR(30) CONSTRAINT nume_complet_client_nn NOT NULL,
+-- telefon CHAR(15) CONSTRAINT telefon_client_nn NOT NULL,
+-- email VARCHAR(50) CONSTRAINT email_client_nn NOT NULL,
+-- cnp CHAR(13),
+-- iban CHAR(34));
 
-ALTER TABLE client
-ADD CONSTRAINT id_client_pk PRIMARY KEY (id_client);
+-- ALTER TABLE client
+-- ADD CONSTRAINT id_client_pk PRIMARY KEY (id_client);
 
 
 
@@ -195,24 +195,24 @@ CREATE TABLE hotel_administrator (
   id_administrator INT REFERENCES administrator(id_administrator),
   PRIMARY KEY (id_hotel,id_administrator));
 
-CREATE TABLE client_replica (
+CREATE TABLE client (
     id_client INT PRIMARY KEY,
     nume_utilizator VARCHAR(50),
     telefon VARCHAR(50)
 );
 
--- Create a trigger function to replicate data
-CREATE OR REPLACE FUNCTION replicate_to_client_table()
-RETURNS TRIGGER AS $$
-BEGIN
-    -- Insert the selected columns into the replica table
-    INSERT INTO client_replica (id_client, nume_utilizator, telefon)
-    VALUES (NEW.id_client, NEW.nume_utilizator, NEW.telefon);
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+-- -- Create a trigger function to replicate data
+-- CREATE OR REPLACE FUNCTION replicate_to_client_table()
+-- RETURNS TRIGGER AS $$
+-- BEGIN
+--     -- Insert the selected columns into the replica table
+--     INSERT INTO client (id_client, nume_utilizator, telefon)
+--     VALUES (NEW.id_client, NEW.nume_utilizator, NEW.telefon);
+--     RETURN NEW;
+-- END;
+-- $$ LANGUAGE plpgsql;
 
--- Create a trigger on the client table to invoke the replicate function
-CREATE TRIGGER replicate_trigger
-AFTER INSERT OR UPDATE OR DELETE ON client
-FOR EACH ROW EXECUTE FUNCTION replicate_to_client_table();
+-- -- Create a trigger on the client table to invoke the replicate function
+-- CREATE TRIGGER replicate_trigger
+-- AFTER INSERT OR UPDATE OR DELETE ON client
+-- FOR EACH ROW EXECUTE FUNCTION replicate_to_client_table();
