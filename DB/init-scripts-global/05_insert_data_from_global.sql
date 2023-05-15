@@ -476,4 +476,4 @@ VALUES ('karma_haynes', 'Z1VJJkz', 'Karma Haynes', '+40 702 096 185', 'xhomenick
 INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
 VALUES ('lyla_gill', 'ToP7Pww', 'Lyla Gill', '+40 707 906 743', 'marlen.collins@hotmail.com', '1920407312546');
 
-COMMIT;
+-- COMMIT;
