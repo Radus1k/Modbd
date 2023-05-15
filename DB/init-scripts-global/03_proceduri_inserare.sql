@@ -218,7 +218,6 @@ BEGIN
         v_id_rezervare:=NEXTVAL('rezervare_serv2_seq');
     END IF;
     
-    
     PERFORM dblink_exec('local','INSERT INTO rezervare(id_rezervare,id_client,id_hotel,data_efectuarii,data_inceput,data_sfarsit) 
                         VALUES(' || v_id_rezervare || ', ' || p_id_client || ', ' || p_id_hotel || ', TO_DATE(''' || p_data_efectuarii || ''',''DD-MM-YYYY''), TO_DATE(''' || p_data_inceput || ''',''DD-MM-YYYY''), TO_DATE(''' || p_data_sfarsit || ''',''DD-MM-YYYY'')); COMMIT;');
     PERFORM dblink_disconnect('local');
@@ -227,7 +226,7 @@ $$;
 
 
 --SELECT dblink_disconnect('local');
---CALL insereaza_in_rezervare(1,1222,CURRENT_DATE,TO_DATE('11-AUG-2023', 'DD-MON-YYYY'), TO_DATE('22-AUG-2023', 'DD-MON-YYYY'));
+-- CALL insereaza_in_rezervare(1,1126,'11-08-2023', '22-08-2023','11-08-2023');
 
 
 

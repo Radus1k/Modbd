@@ -6,3 +6,6 @@ SELECT pglogical.create_node(
 );
 
 -- CREATE SUBSCRIPTION local2_subscription CONNECTION 'dbname=global host=db_postgres_global user=postgres password=postgres' PUBLICATION global_publication;
+
+-- CREATE SUBSCRIPTION client_subscription CONNECTION 'dbname=global host=db_postgres_global user=postgres password=postgres' PUBLICATION client_publication;
+-- ALTER SUBSCRIPTION client_subscription ENABLE;

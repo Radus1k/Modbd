@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load django_bootstrap5 %}
+{% load static %}
+{% block signup %}
+
+<link href="{% static 'css/sign_up.css' %}" rel="stylesheet">
+
+    <div class="singupclass">
+
+        <div class="container" style="color: white; padding-top: 4%; width: 50%; height: 50%; margin: auto; padding-left:10em;" >
+            <div class="row">
+                <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-xl-9">
+                    <div class="card">
+                        {% if user_form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                        {% if profile_form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+
+                        <form class="box align-middle" method="post" style="border-radius: 25px">
+                            <img src="{% static '/images/hotelv2.png' %}" height="70em" width="70em" alt="My image">
+                            {% csrf_token %}
+                            <h4>Înregistrare</h4>
+                            <p class="text-muted">Vă rugăm introduceți datele pentru crearea contului</p>
+                            {% bootstrap_form user_form %}
+                            {% bootstrap_form profile_form %}
+
+                            <button type="submit" class="btn btn-primary" aria-pressed="true">Creare cont</button>
+                        </form>
+                        <a class="btn btn-secondary" href="{% url 'accounts:restore_password' %}">Ai uitat parola?</a>  
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

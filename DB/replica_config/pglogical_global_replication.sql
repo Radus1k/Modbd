@@ -11,3 +11,10 @@ SELECT pglogical.create_subscription(
     replication_sets := ARRAY['local2_set'],
     provider_dsn := 'host=db_postgres_local2 port=5432 dbname=local2 user=postgres password=postgres'
 );
+
+-- Horizontal fragmentation
+CREATE PUBLICATION global_publication FOR TABLE public.facilitate, public.tip_camera, public.administrator; 
+
+-- Horizontal fragmentation
+CREATE PUBLICATION global_client_publication FOR TABLE client (id_client, nume_complet, telefon);
+

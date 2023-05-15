@@ -2,29 +2,33 @@
 CREATE EXTENSION IF NOT EXISTS pglogical;
 
 
-CREATE PUBLICATION global_publication FOR TABLE public.facilitate, public.tip_camera, public.administrator, public.client_replica;
+-- -- Horizontal fragmentation
+-- CREATE PUBLICATION global_publication FOR TABLE public.facilitate, public.tip_camera, public.administrator; 
+
+-- -- Horizontal fragmentation
+-- CREATE PUBLICATION global_client_publication FOR TABLE client (id_client, nume_complet, telefon);
+
+
+-- -- Create the node
+-- SELECT pglogical.create_node(
+--     node_name := 'global',
+--     dsn := 'host=db_postgres_global port=5432 dbname=global user=postgres password=postgres'
+-- );
 
     -- Create the replication slot
-
-SELECT pglogical.create_node(
-    node_name := 'global',
-    dsn := 'host=db_postgres_global port=5432 dbname=global user=postgres password=postgres'
-);
+-- SELECT pglogical.create_replication_set('local1_set');
+-- SELECT pglogical.create_replication_set('local2_set');
 
 
-SELECT pglogical.create_replication_set('local1_set');
-SELECT pglogical.create_replication_set('local2_set');
+-- SELECT pglogical.replication_set_add_table('local1_set', 'public.facilitate');
+-- SELECT pglogical.replication_set_add_table('local1_set', 'public.tip_camera');
+-- SELECT pglogical.replication_set_add_table('local1_set', 'public.administrator');
+-- SELECT pglogical.replication_set_add_table('local1_set', 'public.client_replica');
 
-
-SELECT pglogical.replication_set_add_table('local1_set', 'public.facilitate');
-SELECT pglogical.replication_set_add_table('local1_set', 'public.tip_camera');
-SELECT pglogical.replication_set_add_table('local1_set', 'public.administrator');
-SELECT pglogical.replication_set_add_table('local1_set', 'public.client_replica');
-
-SELECT pglogical.replication_set_add_table('local2_set', 'public.facilitate');
-SELECT pglogical.replication_set_add_table('local2_set', 'public.tip_camera');
-SELECT pglogical.replication_set_add_table('local2_set', 'public.administrator');
-SELECT pglogical.replication_set_add_table('local2_set', 'public.client_replica');
+-- SELECT pglogical.replication_set_add_table('local2_set', 'public.facilitate');
+-- SELECT pglogical.replication_set_add_table('local2_set', 'public.tip_camera');
+-- SELECT pglogical.replication_set_add_table('local2_set', 'public.administrator');
+-- SELECT pglogical.replication_set_add_table('local2_set', 'public.client_replica');
 
 
 -- SELECT pglogical.create_subscription(

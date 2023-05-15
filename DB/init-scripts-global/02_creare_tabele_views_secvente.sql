@@ -198,25 +198,3 @@ CREATE TABLE administrator (
   telefon CHAR(15) NOT NULL,
   email TEXT NOT NULL UNIQUE,
   cnp CHAR(13) NOT NULL UNIQUE);
-
-CREATE TABLE client_replica (
-    id_client INT PRIMARY KEY,
-    nume_utilizator VARCHAR(50),
-    telefon VARCHAR(50)
-);
-
--- Create a trigger function to replicate data
-CREATE OR REPLACE FUNCTION replicate_to_client_table()
-RETURNS TRIGGER AS $$
-BEGIN
-    -- Insert the selected columns into the replica table
-    INSERT INTO client_replica (id_client, nume_utilizator, telefon)
-    VALUES (NEW.id_client, NEW.nume_utilizator, NEW.telefon);
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
--- Create a trigger on the client table to invoke the replicate function
-CREATE TRIGGER replicate_trigger
-AFTER INSERT OR UPDATE OR DELETE ON client
-FOR EACH ROW EXECUTE FUNCTION replicate_to_client_table();

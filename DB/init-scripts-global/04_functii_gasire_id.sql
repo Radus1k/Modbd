@@ -13,9 +13,6 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-
-
-
 CREATE OR REPLACE FUNCTION gaseste_id_judet_cu_nume(p_nume TEXT)
 RETURNS INT AS $$
 DECLARE 
