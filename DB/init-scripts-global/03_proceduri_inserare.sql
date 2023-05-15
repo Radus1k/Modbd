@@ -153,8 +153,6 @@ END;
 $$;
 
 
-
-
 -- OLD REZERVARE METHOD
 
 -- CREATE OR REPLACE PROCEDURE insereaza_in_rezervare(
