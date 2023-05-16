@@ -23,7 +23,7 @@ CREATE VIEW hotel_administrator AS
     FROM dblink(informatii_conectare_bd(2),'SELECT id_hotel, id_administrator FROM hotel_administrator') AS t2(id_hotel INT, id_administrator INT)
   ) AS subquery;
 
-SELECT * FROM hotel_administrator_view;
+SELECT * FROM hotel_administrator;
 
 DROP SEQUENCE IF EXISTS judet_serv1_seq;
 CREATE SEQUENCE judet_serv1_seq

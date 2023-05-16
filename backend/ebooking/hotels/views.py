@@ -9,9 +9,15 @@ from django.http import HttpResponseForbidden
 
 def hotels_view(request):
     user = request.user
-    user_client = Client.objects.get(nume_utilizator=user.username)
+    user_client = None
+    is_admin = False
+    try:
+        user_client = Client.objects.get(nume_utilizator=user.username)
+        is_admin = user_client.is_administrator()
+    except: 
+        print("request user is porbably guest")   
     qs = Hotel.objects.all()
-    context = {"hotels": qs, "is_admin": user_client.is_administrator()}
+    context = {"hotels": qs, "is_admin": is_admin}
     return render(request,'hotels.html', context)
 
 
