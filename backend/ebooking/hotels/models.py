@@ -29,6 +29,13 @@ class Client(models.Model):
         managed = False
         db_table = 'client'
 
+    def is_administrator(self):
+        try:
+            administrator = Administrator.objects.get(nume_utilizator=self.nume_utilizator)
+            return administrator
+        except Administrator.DoesNotExist:
+            return None
+
     def __str__(self) -> str:
         return self.nume_complet
         

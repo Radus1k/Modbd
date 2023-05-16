@@ -164,7 +164,7 @@ class ChangeProfileView(LoginRequiredMixin, FormView):
     def get_initial(self):
         user = self.request.user
         initial = super().get_initial()
-        initial['phone'] = user.profile.phone
+        # initial['phone'] = user.profile.phone
 
         return initial
 

@@ -202,12 +202,6 @@ CREATE TABLE hotel_administrator (
   id_administrator INT REFERENCES administrator(id_administrator),
   PRIMARY KEY (id_hotel,id_administrator));
 
-CREATE TABLE client (
-    id_client INT PRIMARY KEY,
-    nume_utilizator VARCHAR(50),
-    telefon VARCHAR(50)
-);
-
 -- Create a trigger function to replicate data
 CREATE OR REPLACE FUNCTION replicate_to_client_table()
 RETURNS TRIGGER AS $$

@@ -228,9 +228,6 @@ $$;
 
 
 
-
-
-
 CREATE OR REPLACE PROCEDURE insereaza_in_hotel_tip_camera(
 	p_id_hotel INT,
     p_id_tip_camera INT,

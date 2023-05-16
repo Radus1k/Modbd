@@ -1,6 +1,7 @@
 from django import forms
 from .connector import ConnectionManager
 from .models import *
+import datetime
 
 class HotelForm(forms.Form):
     nume = forms.CharField(max_length=50)
@@ -22,18 +23,18 @@ class HotelForm(forms.Form):
         # Perform the specific query to insert the hotel using the provided data
 
 class RezervareForm(forms.Form):
-    id_client = forms.ModelChoiceField(queryset=Client.objects.all())
+    id_client = forms.ModelChoiceField(queryset=Client.objects.all(), widget=forms.HiddenInput)
     id_hotel = forms.ModelChoiceField(queryset=Hotel.objects.all())
-    data_efectuarii = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    # data_efectuarii = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
     data_inceput = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     data_sfarsit = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-    pret_total = forms.FloatField(required=False)
+    # pret_total = forms.FloatField(required=False)
     specificatii = forms.CharField(max_length=2500, required=False, widget=forms.Textarea)
 
     def save(self):
         id_client = self.cleaned_data['id_client'].id_client
         id_hotel = self.cleaned_data['id_hotel'].id_hotel
-        data_efectuarii = self.cleaned_data['data_efectuarii'].strftime('%d/%m/%Y')
+        data_efectuarii = datetime.date.today().strftime('%d/%m/%Y')
         data_inceput = self.cleaned_data['data_inceput'].strftime('%d/%m/%Y')
         data_sfarsit = self.cleaned_data['data_sfarsit'].strftime('%d/%m/%Y')
 

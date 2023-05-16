@@ -7,7 +7,7 @@ RUN apt-get update; \
     apt-get install -y postgresql-15-pglogical; \
     apt-get install -y make; \
     apt-get install -y gcc postgresql-server-dev-all postgresql-contrib; \
-    apt-get install -y libkrb5-dev; 
+    apt-get install -y libkrb5-dev;
 
 
 RUN apt-get update && apt-get install -y git

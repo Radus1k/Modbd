@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+
 {% load static %}
 
 {% load django_bootstrap5 %}
@@ -8,10 +10,12 @@
 
 {% bootstrap_messages %}
 
- <title>Add Hotel</title>
+{% block add_rezervare %}
+
+ <title>Adauga Rezervare</title>
 
 <div class="container">
-    <h1>Add Rezervare</h1>
+    <h1>Adauga Rezervare</h1>
     <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
@@ -22,3 +26,5 @@
 
 </body>
 </html>
+
+{% endblock %}

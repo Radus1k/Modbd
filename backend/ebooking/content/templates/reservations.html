@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block reservations %}
+
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+
+{% bootstrap_javascript %}
+
+
+{% bootstrap_messages %}
+
+<div class="container">
+    {% if request.user.is_superuser %}
+      <h1 style="padding:1em;">All reservations</h1>
+    {% endif %}
+    {% comment %} {% elif request.user.profile.is_hotel_administrator %}
+      <h1 style="padding:1em;">Your hotels reservations</h1>
+    {% else %} {% endcomment %}
+      <h1 style="padding:1em;">Your reservations</h1>
+    {% comment %} {% endif %} {% endcomment %}
+    <div class="row">
+      <div class="col">
+        {% if reservations %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Hotel</th>
+              <th>Booking Date</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Total Price</th>
+              <th>Specifications</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for reservation in reservations %}
+            <tr>
+              <td>{{ reservation.id_client }}</td>
+              <td>{{ reservation.id_hotel }}</td>
+              <td>{{ reservation.data_efectuarii }}</td>
+              <td>{{ reservation.data_inceput }}</td>
+              <td>{{ reservation.data_sfarsit }}</td>
+              <td>{{ reservation.pret_total }}</td>
+              <td>{{ reservation.specificatii }}</td>
+              <td>
+                {% comment %} <a href="{% url 'edit-reservation' reservation_id=reservation.id_rezervare %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'delete-reservation' reservation_id=reservation.id_rezervare %}" class="btn btn-danger">Delete</a> {% endcomment %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>No reservations found.</p>
+        {% endif %}
+        <div class="row justify-content-start">
+          <div class="col-auto">
+            <a href="{% url 'add-rezervare' %}" class="btn btn-primary">Add Reservation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

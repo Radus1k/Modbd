@@ -15,9 +15,11 @@
 <div class="container">
     <h1>Hotel Data</h1>
 
-    <div class="col-auto">
-        <a href="{% url 'add-hotel' %}" class="btn btn-primary">Adauga hotel</a>
-      </div>
+    {% if is_admin %}
+        <div class="col-auto">
+            <a href="{% url 'add-hotel' %}" class="btn btn-primary">Adauga hotel</a>
+        </div>
+    {% endif %}
 
     <table class="table table-striped">
         <thead>

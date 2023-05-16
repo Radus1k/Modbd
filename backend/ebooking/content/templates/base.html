@@ -1,5 +1,7 @@
 {% load static %}
 
+{% load custom_filters %}
+
 {% load django_bootstrap5 %}
 
 {% bootstrap_css %}
@@ -25,8 +27,13 @@
             <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only"></span></a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'add-rezervare' %}">Adauga rezervare <span class="sr-only"></span></a>
+            <a class="nav-link" href="{% url 'reservations' %}">Vezi rezevari <span class="sr-only"></span></a>
           </li>
+          {% if request.user|is_administrator %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'add-rezervare' %}">Adauga rezervare <span class="sr-only"></span></a>
+            </li>
+          {% endif %}
           {% comment %} <li class="nav-item active">
             <a class="nav-link" href="http://localhost:8025/">Mail <span class="sr-only"></span></a>
           </li> {% endcomment %}
@@ -88,7 +95,17 @@
   
   {% block restore_password_confirm %}
   {% endblock %}
+
+  {% block add_rezervare %}
+  {% endblock %}
+  
+  
+  {% block reservations %}
+  {% endblock %}
   
 
+  {% block hotel %}
+  {% endblock %}
+  
 
 </body>
