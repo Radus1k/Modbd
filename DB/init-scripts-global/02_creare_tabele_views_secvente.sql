@@ -10,6 +10,16 @@ AS r2(id_regiune INT ,nume TEXT);
 SELECT * FROM regiune;
 
 
+DROP VIEW IF EXISTS judet;
+CREATE VIEW judet AS
+SELECT * FROM 
+dblink(informatii_conectare_bd(1),'SELECT id_judet,nume,id_regiune FROM judet;') 
+AS j1(id_judet INT, nume TEXT, id_regiune INT)
+UNION 
+SELECT * FROM 
+dblink(informatii_conectare_bd(2),'SELECT id_judet,nume,id_regiune FROM judet;') 
+AS j2(id_judet INT ,nume TEXT, id_regiune INT);
+SELECT * FROM judet;
 
 DROP VIEW IF EXISTS hotel_administrator;
 
@@ -202,8 +212,8 @@ CREATE TABLE administrator (
   email TEXT NOT NULL UNIQUE,
   cnp CHAR(13) NOT NULL UNIQUE);
   
-CREATE VIEW hotel_administrator AS
-SELECT ha.id_hotel, h.nume AS hotel_name, a.nume_complet AS administrator_name
-FROM hotel_administrator ha
-JOIN hotel h ON ha.id_hotel = h.id_hotel
-JOIN administrator a ON ha.id_administrator = a.id_administrator;
+-- CREATE VIEW hotel_administrator AS
+-- SELECT ha.id_hotel, h.nume AS hotel_name, a.nume_complet AS administrator_name
+-- FROM hotel_administrator ha
+-- JOIN hotel h ON ha.id_hotel = h.id_hotel
+-- JOIN administrator a ON ha.id_administrator = a.id_administrator;

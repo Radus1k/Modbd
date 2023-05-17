@@ -15,6 +15,6 @@ SELECT pglogical.create_subscription(
 -- Horizontal fragmentation
 CREATE PUBLICATION global_publication FOR TABLE public.facilitate, public.tip_camera, public.administrator; 
 
--- Horizontal fragmentation
+-- Vertical fragmentation
 CREATE PUBLICATION global_client_publication FOR TABLE client (id_client, nume_complet, telefon);
 
