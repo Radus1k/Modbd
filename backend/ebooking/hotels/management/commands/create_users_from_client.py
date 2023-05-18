@@ -17,5 +17,5 @@ class Command(BaseCommand):
                 first_name=client.nume_complet
                 # Add other fields as needed
             )
-            profile = Profile.objects.create(user=user, phone=client.telefon, is_hotel_administrator=False)
-            self.stdout.write(f'Created User: {user.username}')
+            profile = Profile.objects.create(user=user, phone=client.telefon,iban=client.iban,hash_parola=client.hash_parola)
+            self.stdout.write(f'Created User: {user.username} and Profile associated: {profile}')

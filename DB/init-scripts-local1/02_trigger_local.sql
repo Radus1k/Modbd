@@ -17,7 +17,6 @@ BEGIN
 END
 $$;
 
-
 CREATE OR REPLACE TRIGGER after_insert_on_rezervare
 AFTER INSERT ON rezervare_tip_camera
 FOR EACH ROW

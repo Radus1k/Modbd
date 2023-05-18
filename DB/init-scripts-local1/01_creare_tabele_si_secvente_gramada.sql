@@ -10,9 +10,10 @@ DROP TABLE IF EXISTS client;
 CREATE TABLE client (
     id_client INT PRIMARY KEY,
     nume_complet VARCHAR(50),
-    telefon VARCHAR(50)
+    email VARCHAR(50),
+    telefon VARCHAR(50),
+    iban VARCHAR(50)
 );
-
 
 DROP TABLE IF EXISTS judet CASCADE;
 CREATE TABLE judet

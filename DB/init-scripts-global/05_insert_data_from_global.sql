@@ -446,34 +446,62 @@ CALL insereaza_in_hotel('Hotel Beyfin'::TEXT,4,'Strada Principala, nr 101'::TEXT
 CALL insereaza_in_hotel('Lotus Therm Spa & Luxury Resort'::TEXT,5,'Strada Principala, nr 91'::TEXT,gaseste_id_localitate_cu_nume_si_nume_judet('Baile Herculane','Caras-Severin')::INT);
 
 
-INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
-VALUES ('bernard_noble', 'kr1O2h8', 'Bernard Noble', '+40 710 024 027', 'kstoltenberg@yahoo.com', '1930512378945');
+-- INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
+-- VALUES ('bernard_noble', 'kr1O2h8', 'Bernard Noble', '+40 710 024 027', 'kstoltenberg@yahoo.com', '1930512378945');
 
-INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
-VALUES ('isis_saunders', 'PA3pnYV', 'Isis Saunders', '+40 713 721 929', 'orn.skye@huels.com', '2930705489563');
+-- INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
+-- VALUES ('isis_saunders', 'PA3pnYV', 'Isis Saunders', '+40 713 721 929', 'orn.skye@huels.com', '2930705489563');
 
-INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
-VALUES ('micaela_gillespie', 'G7fSXy8', 'Micaela Gillespie', '+40 713 037 240', 'stuart22@yahoo.com', '2930212489215');
+-- INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
+-- VALUES ('micaela_gillespie', 'G7fSXy8', 'Micaela Gillespie', '+40 713 037 240', 'stuart22@yahoo.com', '2930212489215');
 
-INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
-VALUES ('gilbert_mccarty', 'ek1Rwcq', 'Gilbert Mccarty', '+40 711 666 147', 'gskiles@altenwerth.com', '1950624365458');
+-- INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
+-- VALUES ('gilbert_mccarty', 'ek1Rwcq', 'Gilbert Mccarty', '+40 711 666 147', 'gskiles@altenwerth.com', '1950624365458');
 
-INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
-VALUES ('harmony_ramirez', 'MOqsV7k', 'Harmony Ramirez', '+40 702 003 043', 'wfranecki@farrell.com', '2900628392547');
+-- INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
+-- VALUES ('harmony_ramirez', 'MOqsV7k', 'Harmony Ramirez', '+40 702 003 043', 'wfranecki@farrell.com', '2900628392547');
 
-INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
-VALUES ('noelle_schroeder', 'd2Au0dz', 'Noelle Schroeder', '+40 702 067 475', 'yasmeen86@hotmail.com', '2920702390517');
+-- INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
+-- VALUES ('noelle_schroeder', 'd2Au0dz', 'Noelle Schroeder', '+40 702 067 475', 'yasmeen86@hotmail.com', '2920702390517');
 
-INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
-VALUES ('nathaly_bryan', 'uaVkX6B', 'Nathaly Bryan', '+40 702 088 783', 'arne.williamson@yahoo.com', '1961021357496');
+-- INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
+-- VALUES ('nathaly_bryan', 'uaVkX6B', 'Nathaly Bryan', '+40 702 088 783', 'arne.williamson@yahoo.com', '1961021357496');
 
-INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
-VALUES ('melissa_mercado', 'c2SMIX0', 'Melissa Mercado', '+40 702 082 200', 'wilfredo96@wehner.com', '2941126371239');
+-- INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
+-- VALUES ('melissa_mercado', 'c2SMIX0', 'Melissa Mercado', '+40 702 082 200', 'wilfredo96@wehner.com', '2941126371239');
 
-INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
-VALUES ('karma_haynes', 'Z1VJJkz', 'Karma Haynes', '+40 702 096 185', 'xhomenick@gmail.com', '1961007397128');
+-- INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
+-- VALUES ('karma_haynes', 'Z1VJJkz', 'Karma Haynes', '+40 702 096 185', 'xhomenick@gmail.com', '1961007397128');
 
-INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
-VALUES ('lyla_gill', 'ToP7Pww', 'Lyla Gill', '+40 707 906 743', 'marlen.collins@hotmail.com', '1920407312546');
+-- INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp)
+-- VALUES ('lyla_gill', 'ToP7Pww', 'Lyla Gill', '+40 707 906 743', 'marlen.collins@hotmail.com', '1920407312546');
+
+INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp, iban)
+VALUES ('bernard_noble', 'kr1O2h8', 'Bernard Noble', '+40 710 024 027', 'kstoltenberg@yahoo.com', '1930512378945', 'RO1234567890123456789012');
+
+INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp, iban)
+VALUES ('isis_saunders', 'PA3pnYV', 'Isis Saunders', '+40 713 721 929', 'orn.skye@huels.com', '2930705489563', 'RO2345678901234567890123');
+
+INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp, iban)
+VALUES ('micaela_gillespie', 'G7fSXy8', 'Micaela Gillespie', '+40 713 037 240', 'stuart22@yahoo.com', '2930212489215', 'RO3456789012345678901234');
+
+INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp, iban)
+VALUES ('gilbert_mccarty', 'ek1Rwcq', 'Gilbert Mccarty', '+40 711 666 147', 'gskiles@altenwerth.com', '1950624365458', 'RO4567890123456789012345');
+
+INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp, iban)
+VALUES ('harmony_ramirez', 'MOqsV7k', 'Harmony Ramirez', '+40 702 003 043', 'wfranecki@farrell.com', '2900628392547', 'RO5678901234567890123456');
+
+INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp, iban)
+VALUES ('noelle_schroeder', 'd2Au0dz', 'Noelle Schroeder', '+40 702 067 475', 'yasmeen86@hotmail.com', '2920702390517', 'RO6789012345678901234567');
+
+INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp, iban)
+VALUES ('nathaly_bryan', 'uaVkX6B', 'Nathaly Bryan', '+40 702 088 783', 'arne.williamson@yahoo.com', '1961021357496', 'RO7890123456789012345678');
+
+INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp, iban)
+VALUES ('melissa_mercado', 'c2SMIX0', 'Melissa Mercado', '+40 702 082 200', 'wilfredo96@wehner.com', '2941126371239', 'RO8901234567890123456789');
+
+INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp, iban)
+VALUES ('karma_haynes', 'Z1VJJkz', 'Karma Hay
+
 
 -- COMMIT;

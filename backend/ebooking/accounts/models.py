@@ -6,12 +6,10 @@ User = get_user_model()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=30)
-    is_administrator = models.BooleanField(default=False)
-    id_administrator = models.ForeignKey(HotelAdministrator, models.DO_NOTHING, db_column='id_administrator')
-
+    phone = models.CharField(max_length=30, null=True, blank=True)
+    iban = models.CharField(max_length=50, null=True, blank=True)
+    hash_parola = models.CharField(max_length=50, null=True, blank=True)
     class Meta:
-        managed = False
         db_table = 'profile'
 
     def __str__(self):
