@@ -7,6 +7,7 @@ from django.http import HttpResponseForbidden
 
 # Create your views here.
 
+@login_required
 def hotels_view(request):
     user = request.user
     user_client = None

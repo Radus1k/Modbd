@@ -1,5 +1,6 @@
 from django import template
 from ..models import Administrator, Client
+from django.contrib.auth.models import User
 
 register = template.Library()
 
@@ -7,7 +8,10 @@ register = template.Library()
 def is_administrator(user):
     try:
         user_client = Client.objects.get(nume_utilizator=user.username)
-        if not user_client.is_administrator():
-            return True
-    except Administrator.DoesNotExist:
+    except Client.DoesNotExist:
         return False
+    
+    if not user_client.is_administrator():
+        return True
+    
+    return False

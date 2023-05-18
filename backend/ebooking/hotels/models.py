@@ -32,7 +32,7 @@ class Client(models.Model):
     def is_administrator(self):
         try:
             administrator = Administrator.objects.get(nume_utilizator=self.nume_utilizator)
-            return administrator
+            return True
         except Administrator.DoesNotExist:
             return None
 
