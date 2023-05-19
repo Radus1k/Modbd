@@ -11,7 +11,7 @@ def is_administrator(user):
     except Client.DoesNotExist:
         return False
     
-    if not user_client.is_administrator():
+    if  user_client.is_administrator():
         return True
     
     return False

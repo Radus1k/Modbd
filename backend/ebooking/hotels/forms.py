@@ -41,3 +41,36 @@ class RezervareForm(forms.Form):
         connection_manager = ConnectionManager()
         is_inserted = connection_manager.insert_reservation(id_client, id_hotel, data_efectuarii, data_inceput, data_sfarsit)
         return is_inserted
+
+class HotelTipCameraForm(forms.Form):
+    
+    id_hotel = forms.ModelChoiceField(queryset=Hotel.objects.all())
+    id_tip_camera = forms.ModelChoiceField(queryset=TipCamera.objects.all())
+    nr_camere = forms.IntegerField(max_value=5)    
+    pret_per_noapte = forms.IntegerField()      
+                            
+    def save(self):
+        id_hotel = self.cleaned_data['id_hotel'].id_hotel
+        id_tip_camera = self.cleaned_data['id_tip_camera'].id_tip_camera
+        nr_camere = self.cleaned_data['nr_camere']
+        pret_per_noapte = self.cleaned_data['pret_per_noapte']
+        
+        connection_manager = ConnectionManager()
+        is_inserted = connection_manager.insert_hotel_tip_camera(id_hotel, id_tip_camera, nr_camere, pret_per_noapte)
+        return is_inserted   
+    
+class RezervareTipCameraForm(forms.Form):
+    tip_camera = forms.ModelChoiceField(queryset=TipCamera.objects.all())
+    nr_camere = forms.IntegerField(max_value=5)    
+    # pret_per_noapte = forms.FloatField()
+    
+    def save(self):
+        id_tip_camera = self.cleaned_data['tip_camera'].id_tip_camera
+        nr_camere = self.cleaned_data['tip_camera'].nr_camere
+        # pret_per_noapte = self.cleaned_data['tip_camera'].pret_per_noapte
+        
+        return True
+        
+        # connection_manager = ConnectionManager()
+        # is_inserted = connection_manager.insert_rezervare_tip_camera(id_rezervare, id_tip_camera, nr_camere, pret_per_noapte)
+        # return is_inserted   

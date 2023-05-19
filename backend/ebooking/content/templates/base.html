@@ -29,9 +29,14 @@
           <li class="nav-item active">
             <a class="nav-link" href="{% url 'reservations' %}">Vezi rezevari <span class="sr-only"></span></a>
           </li>
-          {% if request.user|is_administrator %}
+          {% if not request.user|is_administrator %}
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'add-rezervare' %}">Adauga rezervare <span class="sr-only"></span></a>
+            </li>
+          {% endif %}
+          {% if request.user|is_administrator %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'add-camera' %}">Adauga camera hotel <span class="sr-only"></span></a>
             </li>
           {% endif %}
           {% comment %} <li class="nav-item active">
@@ -105,6 +110,9 @@
   
 
   {% block hotel %}
+  {% endblock %}
+
+  {% block add_hotel_tip_camera %}
   {% endblock %}
   
 

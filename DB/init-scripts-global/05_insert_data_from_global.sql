@@ -500,4 +500,9 @@ VALUES ('nathaly_bryan', 'uaVkX6B', 'Nathaly Bryan', '+40 702 088 783', 'arne.wi
 INSERT INTO client (nume_utilizator, hash_parola, nume_complet, telefon, email, cnp, iban)
 VALUES ('melissa_mercado', 'c2SMIX0', 'Melissa Mercado', '+40 702 082 200', 'wilfredo96@wehner.com', '2941126371239', 'RO8901234567890123456789');
 
--- COMMIT;
+INSERT INTO tip_camera (nr_paturi_duble, nr_paturi_simple) VALUES (2, 1);
+INSERT INTO tip_camera (nr_paturi_duble, nr_paturi_simple) VALUES (3, 2);
+INSERT INTO tip_camera (nr_paturi_duble, nr_paturi_simple) VALUES (1, 1);
+INSERT INTO tip_camera (nr_paturi_duble, nr_paturi_simple) VALUES (2, 0);
+
+COMMIT;

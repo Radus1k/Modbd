@@ -23,11 +23,12 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hotels/', hotel_views.hotels_view, name='hotels'),
-    path('/', hotel_views.hotels_view, name='home'),
+    path('', hotel_views.hotels_view, name='home'),
     path('home/', hotel_views.hotels_view, name='home'),
     path('', hotel_views.hotels_view, name='hotels'),
     path('add-hotel/', hotel_views.add_hotel_view, name='add-hotel'),
     path('add-rezervare/', hotel_views.add_rezervare_view, name='add-rezervare'),
+    path('add-hotel-camera/', hotel_views.add_hotelcamera_view, name='add-camera'),
     path('reservations/', hotel_views.reservations_view, name='reservations'), 
     path('accounts/', include('accounts.urls')),
 ]

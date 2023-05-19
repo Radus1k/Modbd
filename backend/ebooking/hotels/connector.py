@@ -85,3 +85,40 @@ class ConnectionManager:
             return False       
     
     
+    def insert_hotel_tip_camera(self, id_hotel, id_tip_camera, nr_camere, pret_per_noapte):
+        query = f"CALL insereaza_in_hotel_tip_camera({id_hotel}, {id_tip_camera}, '{nr_camere}', {pret_per_noapte});"
+
+        try:
+            # Establish a connection to the PostgreSQL database
+            conn = psycopg2.connect(
+                dbname=self.db_name,
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                port=self.port
+            )
+
+            # Create a cursor object to execute the query
+            cursor = conn.cursor()
+
+            # Execute the query
+            cursor.execute(query)
+
+            # Commit the transaction
+            conn.commit()
+
+            # Close the cursor and connection
+            cursor.close()
+            conn.close()
+
+            # Return a success status or result if desired
+            return True
+
+        except (Exception, psycopg2.Error) as error:
+            # Handle any exceptions or errors that occurred during the execution
+            # Print or log the error message
+            print("Error executing query:", error)
+
+            # Return a failure status or result if desired
+            return False 
+    

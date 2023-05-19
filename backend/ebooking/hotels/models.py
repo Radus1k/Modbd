@@ -31,10 +31,10 @@ class Client(models.Model):
 
     def is_administrator(self):
         try:
-            administrator = Administrator.objects.get(nume_utilizator=self.nume_utilizator)
+            Administrator.objects.get(nume_utilizator=self.nume_utilizator)
             return True
         except Administrator.DoesNotExist:
-            return None
+            return False
 
     def __str__(self) -> str:
         return self.nume_complet
@@ -57,8 +57,10 @@ class TipCamera(models.Model):
     class Meta:
         managed = False
         db_table = 'tip_camera'
-      
-
+        
+    def __str__(self):
+        return f"TipCamera #{self.id_tip_camera}: Doubles: {self.nr_paturi_duble}, Singles: {self.nr_paturi_simple}"
+    
 class Hotel(models.Model):
     id_hotel = models.IntegerField(primary_key=True)
     nume = models.CharField(max_length=50)
